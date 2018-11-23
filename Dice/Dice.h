@@ -3,8 +3,10 @@
 
 #include "DiceFaces.h"
 #include <string>
+#include "../Lib/ObserverPattern/Subject.h"
 
-class Dice
+//the dice will be observed, therefore it must be derived from the subject class
+class Dice : public Subject
 {
   //the dice class
   private:
@@ -18,7 +20,7 @@ class Dice
     ~Dice(); //destructor
     void roll(); //method to roll the dice (all of them)
     void rollSelectedDice(); //a method to reroll dice selected by the user
-	void rollSelectedDice(int indices[6], int);
+	  void rollSelectedDice(int indices[6], int);
     enum DiceFaces* getResult(); //method to get the result of the dice roll
     std::string toString(); //method to display the result of the roll
     int getDiceToReRoll(); //a method to get the number of dice to be rerolled

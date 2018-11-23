@@ -5,6 +5,7 @@
 #include <time.h>
 #include <iostream>
 #include <cstddef>
+#include "../Lib/ObserverPattern/DiceObserver.h"
 
 
 
@@ -19,6 +20,9 @@ Dice::Dice()
   rolled[4] = Attack;
   rolled[5] = Attack;
   diceToReRoll = 0;
+
+  //when a dice is created, we should also attach a dice observer to it
+  attach(new DiceObserver(this));
 }
 
 Dice::~Dice()
@@ -64,6 +68,9 @@ void Dice::roll()
 
   }
 
+  //now that we finished rolling the dice, we should notify the observers
+  notify();
+
   //now that we no longer need the random number generator we should delete its resources and also the random number array
   delete r;
   r = NULL;
@@ -108,7 +115,6 @@ void Dice::rollSelectedDice()
   else
   {
     //otherwise, if he has specified the dice he wishes to roll, then we must roll the dice he said to reroll
-    std::cout << "Rerolling selected dice..." << std::endl;
 
     //we will need to generate the right number of random numbers
     //we need to generate (diceToReRoll) random numbers
@@ -127,6 +133,8 @@ void Dice::rollSelectedDice()
       randomNumberIndex++; //then increment the randomNumberIndex so that in the next iteration we take the next random number
     }
 
+    //now that we have finished rolling the dice, we should notify the observers
+    notify();
     //make sure to free the resources since we don't need them anymore
     delete[] dice;
     dice = NULL;

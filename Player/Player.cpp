@@ -280,7 +280,6 @@ void Player::rollDice()
 	//the player will roll once regardless of the situation
 	dice->roll();
 	rollCount++;
-	std::cout << dice->toString() << std::endl;
 
 	//now that the dice has been rolled once, we need to ask the player if he would like to roll again
 
@@ -330,7 +329,6 @@ void Player::rollDice()
 		{
 			//if the user answered yes, then we need to ask him to roll selected dice
 			dice->rollSelectedDice();
-			std::cout << name << ", the result of your roll was: " << dice->toString() << std::endl;
 			rollCount++; //add one to the number of times the dice was rolled
 			badInput = true; //we want the user to be prompted again for the third reroll
 		}
@@ -347,7 +345,6 @@ void Player::rollDiceOnce()
 
 	//the player will roll once only
 	dice->roll();
-	std::cout << dice->toString() << std::endl;
 }
 
 void Player::move()
