@@ -8,7 +8,7 @@
 class CardObserver : public Observer
 {
   private:
-    Subject* subject; //the subject that this is observing (it must be a card)
+    Subject* subject; //the subject that this is observing (it must be a player)
 
   public:
     CardObserver(Subject*); //a constructor that initializes the cardobserver with a particular subject

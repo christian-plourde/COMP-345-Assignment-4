@@ -18,6 +18,7 @@
 #include "../Lib/ObserverPattern/Observer.h"
 #include "../Lib/ObserverPattern/GameStatisticsObserver.h"
 #include "../Lib/ObserverPattern/GamePhaseObserver.h"
+#include "../Lib/ObserverPattern/CardObserver.h"
 #include "../Lib/StrategyPattern/Strategy.h"
 #include "../Lib/RandomNumberGenerator/RandomNumberGenerator.h"
 
