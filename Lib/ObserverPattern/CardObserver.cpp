@@ -1,6 +1,7 @@
 #include "CardObserver.h"
 #include <iostream>
 #include "../../Player/Player.h"
+#include "../../Deck/Card.h"
 
 CardObserver::CardObserver(Subject* s)
 {
