@@ -1475,7 +1475,7 @@ void Player::buyCards(CardDeck* deck)
 						for (int i = 0; i < 3; i++)
 						{
 							node<Card> *card = topThree->getHead();
-							topThree->remove(card); //remove the card from the deck
+							topThree->pull(card); //remove the card from the deck
 							topThree->addLast(card); //add it back to the end
 						}
 
@@ -1516,20 +1516,21 @@ void Player::buyCards(CardDeck* deck)
 
 
 					//now that the current card pointer points to the card that he wants, add it to his hand
-					Card toAdd = currentCard->getData();
-					node<Card> cardToAdd;
-					cardToAdd.setData(toAdd);
+					//we need to create a new node with the card to add and place it in the players hand
+					node<Card>* toAdd = new node<Card>();
+					toAdd->setData(currentCard->getData());
+
 
 					//we need to check if the player has enough energy to actually purchase the card
 					try
 					{
-						if (energy >= toAdd.getCost())
+						if (energy >= toAdd -> getData().getCost())
 						{
 							//if the energy was greater than the cost of the card, then the player can purchase it
-							cards->add(&cardToAdd); //add the card to the player's cards
-							topThree->remove(currentCard); //remove it from the cards available
+							cards->add(toAdd); //add the card to the player's cards
+							topThree->pull(currentCard); //remove it from the cards available
 							//finally, decrease the energy of the player by the cost of the card
-							energy = energy - toAdd.getCost();
+							energy = energy - toAdd->getData().getCost();
 						}
 
 						else
@@ -1750,7 +1751,7 @@ void Player::cpuBuyCards(CardDeck* deck) {
 					for (int i = 0; i < 3; i++)
 					{
 						node<Card> *card = topThree->getHead();
-						topThree->remove(card); //remove the card from the deck
+						topThree->pull(card); //remove the card from the deck
 						topThree->addLast(card); //add it back to the end
 					}
 
@@ -1791,21 +1792,22 @@ void Player::cpuBuyCards(CardDeck* deck) {
 
 
 				//now that the current card pointer points to the card that he wants, add it to his hand
-				Card toAdd = currentCard->getData();
-				cout << getName() << " has bought card " << toAdd.getName() << endl;
-				node<Card> cardToAdd;
-				cardToAdd.setData(toAdd);
+				node<Card>* toAdd = new node<Card>();
+				toAdd->setData(currentCard->getData());
+
+				cout << getName() << " has bought card " << toAdd -> getData().getName() << endl;
+
 
 				//we need to check if the player has enough energy to actually purchase the card
 				try
 				{
-					if (energy >= toAdd.getCost())
+					if (energy >= toAdd -> getData().getCost())
 					{
 						//if the energy was greater than the cost of the card, then the player can purchase it
-						cards->add(&cardToAdd); //add the card to the player's cards
-						topThree->remove(currentCard); //remove it from the cards available
+						cards->add(toAdd); //add the card to the player's cards
+						topThree->pull(currentCard); //remove it from the cards available
 						//finally, decrease the energy of the player by the cost of the card
-						energy = energy - toAdd.getCost();
+						energy = energy - toAdd -> getData().getCost();
 					}
 
 					else

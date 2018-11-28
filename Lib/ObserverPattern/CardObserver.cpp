@@ -20,14 +20,18 @@ void CardObserver::Update()
   //if he does have cards in his hand, we should print out information about each card that he does have
   else
   {
-    node<Card>* curr = dynamic_cast<Player*>(subject) -> getCards() -> getHead();
     int i = 1;
-
+    node<Card>* curr = dynamic_cast<Player*>(subject) -> getCards() -> getHead();
     std::cout << dynamic_cast<Player*>(subject) -> getName() << ", these are the cards in your hand:" << std::endl;
     while(curr != NULL)
     {
-      std::cout << i << ". " << curr -> getData().getName() << "\t" << curr -> getData().getEffect() << std::endl;
+
+      std::cout << i << ". ";
+      std::cout << curr -> getData().getName() << "\t" << curr -> getData().getEffect();
+      std::cout << std::endl;
+      std::cout << std::endl;
       curr = curr -> getNext();
+      i++;
     }
   }
 
