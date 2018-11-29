@@ -77,3 +77,8 @@ void Card::Print() {
 	cout << "  How To Play: " << how_To[howTo] << endl;		// print string representation of how to
 	cout << "  Effect: " << effect << " }" << endl;
 }
+
+void Card::Play()
+{
+	//the play method does absolutely nothing for the base class
+}

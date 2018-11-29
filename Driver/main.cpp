@@ -54,8 +54,8 @@ int main()
 	TileDeck* deck = new TileDeck();								// creates a deck of tiles
 	node<Player*>* playerNodes = Player::players->getHead();		// list of players to go through for game loop
 	Player* playerData = playerNodes->getData();					// holds data about current player
-	CardDeck* cardDeck = new CardDeck();							// creates a deck of cards
-
+	//CardDeck* cardDeck = new CardDeck();							// creates a deck of cards
+	CardDeck* cardDeck = new CardDeck("ImplementedCards.csv", true);
 
 	const int WINNING_VICTORY_POINTS = 20;							// total number of victory points required for winning
 	bool hasWon = false;											// flag for if any player has won

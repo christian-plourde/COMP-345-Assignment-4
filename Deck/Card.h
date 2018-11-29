@@ -32,6 +32,7 @@ public:
 	string getEffect() const;					// get effect of card
 
 	void Print();								// nice print of card
+	virtual void Play(); //this method is called when the card is played
 };
 
 #endif

@@ -15,6 +15,8 @@ int longestNameSize = 0;			// holds longest card name size for table print funct
 
 // card deck default constructor
 CardDeck::CardDeck() {
+
+
 	cardDeckList = new SinglyLinkedList<Card>();
 	discardedCards = new SinglyLinkedList<Card>();
 	string fname = "cards.csv";							// file name holding all information about cards
@@ -70,6 +72,82 @@ CardDeck::CardDeck() {
 	}
 }
 
+CardDeck::CardDeck(string fname, bool useImplementedCards)
+{
+	if(!useImplementedCards)
+		CardDeck();
+	else
+	{
+		//if we chose to use the implemented cards, we need to do something different
+		//we need to know which card we are using in order to create one of the correct type
+		cardDeckList = new SinglyLinkedList<Card>();
+		discardedCards = new SinglyLinkedList<Card>();
+		int noOfCards = 0;
+		string i, n, c, h, e;								// holds information when reading from cards file
+		ifstream file(fname);								// sets up to open card file
+		int count = 0;										// current index in array
+
+		if(file)
+		{
+			//we need to know how many cards are in the file
+			while(getline(file, i, '\n'))
+			{
+				noOfCards++;
+			}
+
+			file.close();
+		}
+
+
+		//now that we know how many cards are in the deck, we can create them
+		//first initialize the number of cards to however many we have
+
+		numberOfCards = noOfCards;
+		cards = new Card[numberOfCards];
+
+		file.clear();
+		file.open(fname);
+		if (file)
+		{
+			// if file can be opened
+			while (getline(file, i, ','))
+			{
+				// while still cards to create, create them
+				cards[count].setID(stringToInt(i));
+				getline(file, n, ',');
+				cards[count].setName(n);
+				getline(file, c, ',');
+				cards[count].setCost(stringToInt(c));
+				getline(file, h, ',');
+				cards[count].setHowTo(stringToHowTo(h));
+				getline(file, e);
+				cards[count].setEffect(e);
+				count++;									// move to next card (array position)
+				if (n.size() > longestNameSize)				// find longest name, for print function
+					longestNameSize = n.size();
+
+			}
+			file.close();			// finished with file, so close
+		}
+		else {                                      // file cannot be opened
+			cout << "ERROR: FAILURE TO OPEN FILE, exiting..." << endl;
+			system("pause");
+			exit(1);
+		}
+
+		ShuffleImplementedCards();				// shuffle the deck twice for more randomness
+		ShuffleImplementedCards();
+
+		// take all cards from array and insert them into linked list
+		for (int i = 0; i < numberOfCards; i++) {
+			node<Card> *nodes = new node<Card>();
+			nodes->setData(cards[i]);
+			cardDeckList->addLast(nodes);
+		}
+
+	}
+}
+
 // converts a string holding an integer to an integer
 int stringToInt(string n) {
 	stringstream num(n);
@@ -94,6 +172,7 @@ CardDeck::~CardDeck() {
 
 	delete cardDeckList;
 	delete discardedCards;
+	delete cards;
 }
 
 // return pointer to deck of cards
@@ -145,6 +224,16 @@ void CardDeck::Shuffle() {
 
 	for (int i = 0; i < NUMBER_OF_CARDS; i++)
 		swap(cardDeck[i], cardDeck[rand() % NUMBER_OF_CARDS]);
+}
+
+void CardDeck::ShuffleImplementedCards()
+{
+	srand(time(0));
+
+	for(int i = 0; i < numberOfCards; i++)
+	{
+		swap(cards[i], cards[rand()%numberOfCards]);
+	}
 }
 
 
