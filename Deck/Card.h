@@ -1,6 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 #include <string>
+class Player;
 using namespace std;
 
 enum HowTo { Empty, Goal, Keep, Discard };		// possible how tos of cards
@@ -32,7 +33,7 @@ public:
 	string getEffect() const;					// get effect of card
 
 	void Print();								// nice print of card
-	virtual void Play(); //this method is called when the card is played
+	virtual void Play(Player* playerData); //this method is called when the card is played
 };
 
 #endif

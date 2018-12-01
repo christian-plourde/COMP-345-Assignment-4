@@ -78,7 +78,7 @@ void Card::Print() {
 	cout << "  Effect: " << effect << " }" << endl;
 }
 
-void Card::Play()
+void Card::Play(Player* playerData)
 {
 	//the play method does absolutely nothing for the base class
 }
