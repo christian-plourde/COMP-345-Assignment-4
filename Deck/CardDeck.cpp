@@ -25,8 +25,8 @@ int longestNameSize = 0;			// holds longest card name size for table print funct
 CardDeck::CardDeck() {
 
 
-	cardDeckList = new SinglyLinkedList<Card>();
-	discardedCards = new SinglyLinkedList<Card>();
+	cardDeckList = new SinglyLinkedList<Card*>();
+	discardedCards = new SinglyLinkedList<Card*>();
 	string fname = "cards.csv";							// file name holding all information about cards
 	string i, n, c, h, e;								// holds information when reading from cards file
 	ifstream file(fname);								// sets up to open card file
@@ -74,8 +74,8 @@ CardDeck::CardDeck() {
 
 	// take all cards from array and insert them into linked list
 	for (int i = 0; i < NUMBER_OF_CARDS; i++) {
-		node<Card> *nodes = new node<Card>();
-		nodes->setData(cardDeck[i]);
+		node<Card*> *nodes = new node<Card*>();
+		nodes->setData(&cardDeck[i]);
 		cardDeckList->addLast(nodes);
 	}
 }
@@ -88,8 +88,8 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 	{
 		//if we chose to use the implemented cards, we need to do something different
 		//we need to know which card we are using in order to create one of the correct type
-		cardDeckList = new SinglyLinkedList<Card>();
-		discardedCards = new SinglyLinkedList<Card>();
+		cardDeckList = new SinglyLinkedList<Card*>();
+		discardedCards = new SinglyLinkedList<Card*>();
 		int noOfCards = 0;
 		string i, n, c, h, e;								// holds information when reading from cards file
 		ifstream file(fname);								// sets up to open card file
@@ -111,7 +111,7 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 		//first initialize the number of cards to however many we have
 
 		numberOfCards = noOfCards;
-		cards = new Card[numberOfCards];
+		cards = new Card*[numberOfCards];
 
 		/*file.clear();
 		file.open(fname);
@@ -147,11 +147,11 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 		RegenerationCard* regen = new RegenerationCard();
 		FlatIronBuildingCard* flat = new FlatIronBuildingCard();
 		ConeyIslandCard* coney = new ConeyIslandCard();
-		cards[0] = *subt;
-		cards[1] = *power;
-		cards[2] = *regen;
-		cards[3] = *flat;
-		cards[4] = *coney;
+		cards[0] = subt;
+		cards[1] = power;
+		cards[2] = regen;
+		cards[3] = flat;
+		cards[4] = coney;
 
 
 
@@ -160,7 +160,7 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 
 		// take all cards from array and insert them into linked list
 		for (int i = 0; i < numberOfCards; i++) {
-			node<Card> *nodes = new node<Card>();
+			node<Card*> *nodes = new node<Card*>();
 			nodes->setData(cards[i]);
 			cardDeckList->addLast(nodes);
 		}
@@ -196,12 +196,12 @@ CardDeck::~CardDeck() {
 }
 
 // return pointer to deck of cards
-SinglyLinkedList<Card>* CardDeck::getDeck() {
+SinglyLinkedList<Card*>* CardDeck::getDeck() {
 	return cardDeckList;
 }
 
 // return pointer to deck of discarded cards
-SinglyLinkedList<Card>* CardDeck::getDiscardedDeck() {
+SinglyLinkedList<Card*>* CardDeck::getDiscardedDeck() {
 	return discardedCards;
 }
 

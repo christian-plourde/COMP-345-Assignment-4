@@ -16,4 +16,5 @@ void SubterraneanCableCard::Play(Player* playerData) {
 	/*playerData->setEnergy(playerData->getEnergy() + 4);
 	playerData->setHealth(playerData->getHealth() - 4);*/
 	cout << "SUBTERRANEAN CABLE CARD USED" << endl;
+	system("pause");
 }

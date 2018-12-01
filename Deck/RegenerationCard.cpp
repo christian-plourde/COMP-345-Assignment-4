@@ -15,4 +15,5 @@ RegenerationCard::~RegenerationCard() {
 void RegenerationCard::Play(Player* playerData) {
 	//playerData->setHealth(playerData->getHealth() + 1);
 	cout << "REGENERATION CARD USED" << endl;
+	system("pause");
 }

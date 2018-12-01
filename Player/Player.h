@@ -38,7 +38,7 @@ class Player : public Subject
     enum Phase phase; //this will track which phase the player is in
     void initializeChosenCharacters(); //a method to initialize the chosen characters when beginning the game
     Dice* dice; //the dice that the player will be rolling
-    SinglyLinkedList<Card>* cards; // this is a linked list holding all the cards that the player has in his hand
+    SinglyLinkedList<Card*>* cards; // this is a linked list holding all the cards that the player has in his hand
 	  Strategy *strategy;
 
   public:
@@ -78,7 +78,7 @@ class Player : public Subject
 	  void cpuDestroyBuildings(SinglyLinkedList<int>*, int);
     void buyCards(CardDeck*); //a method to allow the player to buy cards
 	  void cpuBuyCards(CardDeck*);
-    SinglyLinkedList<Card>* getCards(); //gets the list of cards the player has in his hand
+    SinglyLinkedList<Card*>* getCards(); //gets the list of cards the player has in his hand
     static SinglyLinkedList<Player*>* players; // a singly linked list containing a pointer to each player
 
 	  void removePlayer(enum Characters);

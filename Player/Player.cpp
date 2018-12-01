@@ -27,7 +27,7 @@ Player::Player()
 	//we need to set the start zone of the player
 	zone = playerNumber; //arbitrarily set it to the playerNumber, it will be changed after anyways
 	dice = new Dice(); //the dice that the player will be using
-	cards = new SinglyLinkedList<Card>(); //this will hold the cards the player has in his possession
+	cards = new SinglyLinkedList<Card*>(); //this will hold the cards the player has in his possession
 	node<Player*>* newNode = new node<Player*>();
 	newNode->setData(this);
 	players->add(newNode);
@@ -56,7 +56,7 @@ Player::Player(std::string name)
 	//we need to set the start zone of the player
 	zone = playerNumber; //arbitrarily set it to the playerNumber, it will be changed after anyways
 	dice = new Dice(); //the dice that the player will be using
-	cards = new SinglyLinkedList<Card>(); //this will hold the cards the player has in his possession
+	cards = new SinglyLinkedList<Card*>(); //this will hold the cards the player has in his possession
 	node<Player*>* newNode = new node<Player*>();
 	newNode->setData(this);
 	players->add(newNode);
@@ -579,7 +579,7 @@ void Player::cpuMove() {
 }
 
 
-SinglyLinkedList<Card>* Player::getCards()
+SinglyLinkedList<Card*>* Player::getCards()
 {
 	return cards;
 }
@@ -1355,8 +1355,8 @@ void Player::buyCards(CardDeck* deck)
 		bool newCardsRequested = false; //this will keep track of whether or not the player has requested new cards
 		bool moreCardsDesired = false; //this will keep track of whether or not the player would like
 									   //to purchase more cards
-		SinglyLinkedList<Card>* topThree = deck->getDeck(); //the list of the cards that are still not discarded
-		node<Card>* currentCard = topThree->getHead(); //the head of the list
+		SinglyLinkedList<Card*>* topThree = deck->getDeck(); //the list of the cards that are still not discarded
+		node<Card*>* currentCard = topThree->getHead(); //the head of the list
 		//we need to check if there are even three cards available
 		int count = topThree->getCount();
 
@@ -1380,7 +1380,7 @@ void Player::buyCards(CardDeck* deck)
 				for (int i = 0; i < 3; i++)
 				{
 					std::cout << (i + 1) << ". ";
-					currentCard->getData().Print();
+					currentCard->getData()->Print();
 					currentCard = currentCard->getNext();
 				}
 
@@ -1394,7 +1394,7 @@ void Player::buyCards(CardDeck* deck)
 				for (i = 0; i < count; i++)
 				{
 					std::cout << (i + 1) << ". ";
-					currentCard->getData().Print();
+					currentCard->getData()->Print();
 					currentCard = currentCard->getNext();
 				}
 
@@ -1474,7 +1474,7 @@ void Player::buyCards(CardDeck* deck)
 
 						for (int i = 0; i < 3; i++)
 						{
-							node<Card> *card = topThree->getHead();
+							node<Card*> *card = topThree->getHead();
 							topThree->pull(card); //remove the card from the deck
 							topThree->addLast(card); //add it back to the end
 						}
@@ -1517,20 +1517,20 @@ void Player::buyCards(CardDeck* deck)
 
 					//now that the current card pointer points to the card that he wants, add it to his hand
 					//we need to create a new node with the card to add and place it in the players hand
-					node<Card>* toAdd = new node<Card>();
-					toAdd->setData(currentCard->getData());
+					node<Card*>* toAdd = new node<Card*>();
+					toAdd->setData((currentCard->getData()));
 
 
 					//we need to check if the player has enough energy to actually purchase the card
 					try
 					{
-						if (energy >= toAdd -> getData().getCost())
+						if (energy >= toAdd -> getData() -> getCost())
 						{
 							//if the energy was greater than the cost of the card, then the player can purchase it
 							cards->add(toAdd); //add the card to the player's cards
 							topThree->pull(currentCard); //remove it from the cards available
 							//finally, decrease the energy of the player by the cost of the card
-							energy = energy - toAdd->getData().getCost();
+							energy = energy - toAdd->getData()->getCost();
 						}
 
 						else
@@ -1622,8 +1622,8 @@ void Player::cpuBuyCards(CardDeck* deck) {
 	bool newCardsRequested = false; //this will keep track of whether or not the player has requested new cards
 	bool moreCardsDesired = false; //this will keep track of whether or not the player would like
 									//to purchase more cards
-	SinglyLinkedList<Card>* topThree = deck->getDeck(); //the list of the cards that are still not discarded
-	node<Card>* currentCard = topThree->getHead(); //the head of the list
+	SinglyLinkedList<Card*>* topThree = deck->getDeck(); //the list of the cards that are still not discarded
+	node<Card*>* currentCard = topThree->getHead(); //the head of the list
 	//we need to check if there are even three cards available
 	int count = topThree->getCount();
 	RandomNumberGenerator* r = new RandomNumberGenerator();
@@ -1655,7 +1655,7 @@ void Player::cpuBuyCards(CardDeck* deck) {
 			for (int i = 0; i < 3; i++)
 			{
 				std::cout << (i + 1) << ". ";
-				currentCard->getData().Print();
+				currentCard->getData()->Print();
 				currentCard = currentCard->getNext();
 			}
 
@@ -1669,7 +1669,7 @@ void Player::cpuBuyCards(CardDeck* deck) {
 			for (i = 0; i < count; i++)
 			{
 				std::cout << (i + 1) << ". ";
-				currentCard->getData().Print();
+				currentCard->getData()->Print();
 				currentCard = currentCard->getNext();
 			}
 
@@ -1750,7 +1750,7 @@ void Player::cpuBuyCards(CardDeck* deck) {
 
 					for (int i = 0; i < 3; i++)
 					{
-						node<Card> *card = topThree->getHead();
+						node<Card*> *card = topThree->getHead();
 						topThree->pull(card); //remove the card from the deck
 						topThree->addLast(card); //add it back to the end
 					}
@@ -1792,22 +1792,22 @@ void Player::cpuBuyCards(CardDeck* deck) {
 
 
 				//now that the current card pointer points to the card that he wants, add it to his hand
-				node<Card>* toAdd = new node<Card>();
-				toAdd->setData(currentCard->getData());
+				node<Card*>* toAdd = new node<Card*>();
+				toAdd->setData((currentCard->getData()));
 
-				cout << getName() << " has bought card " << toAdd -> getData().getName() << endl;
+				cout << getName() << " has bought card " << toAdd -> getData() -> getName() << endl;
 
 
 				//we need to check if the player has enough energy to actually purchase the card
 				try
 				{
-					if (energy >= toAdd -> getData().getCost())
+					if (energy >= toAdd -> getData() -> getCost())
 					{
 						//if the energy was greater than the cost of the card, then the player can purchase it
 						cards->add(toAdd); //add the card to the player's cards
 						topThree->pull(currentCard); //remove it from the cards available
 						//finally, decrease the energy of the player by the cost of the card
-						energy = energy - toAdd -> getData().getCost();
+						energy = energy - toAdd -> getData() -> getCost();
 					}
 
 					else

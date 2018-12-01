@@ -13,12 +13,12 @@ class CardDeck
 private:
 	Card specialCards[NUMBER_OF_SPECIAL_CARDS];				// array to hold special cards
 	Card cardDeck[NUMBER_OF_CARDS];							// array that initally creates cards, used to shuffle deck
-	SinglyLinkedList<Card>* cardDeckList;					// deck of cards
-	SinglyLinkedList<Card>* discardedCards;					// deck of discarded cards
+	SinglyLinkedList<Card*>* cardDeckList;					// deck of cards
+	SinglyLinkedList<Card*>* discardedCards;					// deck of discarded cards
 
 	//the following variables are for use in creating a deck with implemented cards
 	int numberOfCards;
-	Card* cards; //this will be an array use to shuffle the implemented cards
+	Card** cards; //this will be an array use to shuffle the implemented cards
 
 public:
 	CardDeck();			// constructor
@@ -28,8 +28,8 @@ public:
 
 	~CardDeck();		// destructor
 
-	SinglyLinkedList<Card>* getDeck();				// returns pointer to deck of cards
-	SinglyLinkedList<Card>* getDiscardedDeck();		// returns pointer to deck of discarded cards
+	SinglyLinkedList<Card*>* getDeck();				// returns pointer to deck of cards
+	SinglyLinkedList<Card*>* getDiscardedDeck();		// returns pointer to deck of discarded cards
 
 	void Print(SinglyLinkedList<Card>*);			// prints a deck of cards in a table
 	void Shuffle();									// shuffles the deck

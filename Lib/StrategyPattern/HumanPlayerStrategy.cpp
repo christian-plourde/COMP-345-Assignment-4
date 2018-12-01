@@ -134,6 +134,15 @@ void HumanPlayerStrategy::execute(Player* playerData, CardDeck* cardDeck) {
 
 		// 4. Buy Cards (optional)
 		playerData->buyCards(cardDeck);
+
+		SinglyLinkedList<Card*>* cards = playerData -> getCards();
+		node<Card*>* curr = cards -> getHead();
+
+		while(curr != NULL)
+		{
+			curr -> getData() -> Play(playerData);
+			curr = curr -> getNext();
+		}
 		// 5. End Turn
 	}
 }

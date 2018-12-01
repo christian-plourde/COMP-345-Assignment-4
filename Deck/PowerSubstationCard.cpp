@@ -17,4 +17,5 @@ void PowerSubstationCard::Play(Player* playerData) {
 	playerData->setEnergy(playerData->getEnergy() + 8);
 	playerData->setHealth(playerData->getHealth() - 3);*/
 	cout << "POWER SUBSTATION CARD USED" << endl;
+	system("pause");
 }

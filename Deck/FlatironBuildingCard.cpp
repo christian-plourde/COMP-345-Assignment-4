@@ -16,4 +16,5 @@ void FlatIronBuildingCard::Play(Player* playerData) {
 	// NEEDS COST CHANGES
 	//playerData->setVictoryPoints(playerData->getVictoryPoints() + 2);
 	cout << "FLATIRON BUILDING CARD USED" << endl;
+	system("pause");
 }

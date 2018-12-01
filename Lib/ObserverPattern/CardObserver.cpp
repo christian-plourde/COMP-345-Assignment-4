@@ -21,13 +21,13 @@ void CardObserver::Update()
   else
   {
     int i = 1;
-    node<Card>* curr = dynamic_cast<Player*>(subject) -> getCards() -> getHead();
+    node<Card*>* curr = dynamic_cast<Player*>(subject) -> getCards() -> getHead();
     std::cout << dynamic_cast<Player*>(subject) -> getName() << ", these are the cards in your hand:" << std::endl;
     while(curr != NULL)
     {
 
       std::cout << i << ". ";
-      std::cout << curr -> getData().getName() << "\t" << curr -> getData().getEffect();
+      std::cout << curr -> getData() -> getName() << "\t" << curr -> getData() -> getEffect();
       std::cout << std::endl;
       std::cout << std::endl;
       curr = curr -> getNext();

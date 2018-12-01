@@ -16,4 +16,5 @@ void ConeyIslandCard::Play(Player* playerData) {
 	// NEEDS COST CHANGES
 	//playerData->setVictoryPoints(playerData->getVictoryPoints() + 3);
 	cout << "CONY ISLAND CARD USED" << endl;
+	system("pause");
 }
