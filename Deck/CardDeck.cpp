@@ -7,6 +7,14 @@
 #include <cstdlib>
 #include<sstream>
 #include "CardDeck.h"
+
+#include "SubterraneanCableCard.h"
+#include "RegenerationCard.h"
+#include "PowerSubstationCard.h"
+#include "FlatironBuildingCard.h"
+#include "ConeyIslandCard.h"
+
+
 using namespace std;
 
 int stringToInt(string);			// converts a string holding an integer to an integer
@@ -74,7 +82,7 @@ CardDeck::CardDeck() {
 
 CardDeck::CardDeck(string fname, bool useImplementedCards)
 {
-	if(!useImplementedCards)
+	if (!useImplementedCards)
 		CardDeck();
 	else
 	{
@@ -87,10 +95,10 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 		ifstream file(fname);								// sets up to open card file
 		int count = 0;										// current index in array
 
-		if(file)
+		if (file)
 		{
 			//we need to know how many cards are in the file
-			while(getline(file, i, '\n'))
+			while (getline(file, i, '\n'))
 			{
 				noOfCards++;
 			}
@@ -105,7 +113,7 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 		numberOfCards = noOfCards;
 		cards = new Card[numberOfCards];
 
-		file.clear();
+		/*file.clear();
 		file.open(fname);
 		if (file)
 		{
@@ -133,7 +141,19 @@ CardDeck::CardDeck(string fname, bool useImplementedCards)
 			cout << "ERROR: FAILURE TO OPEN FILE, exiting..." << endl;
 			system("pause");
 			exit(1);
-		}
+		}*/
+		SubterraneanCableCard* subt = new SubterraneanCableCard();
+		PowerSubstationCard* power = new PowerSubstationCard();
+		RegenerationCard* regen = new RegenerationCard();
+		FlatIronBuildingCard* flat = new FlatIronBuildingCard();
+		ConeyIslandCard* coney = new ConeyIslandCard();
+		cards[0] = *subt;
+		cards[1] = *power;
+		cards[2] = *regen;
+		cards[3] = *flat;
+		cards[4] = *coney;
+
+
 
 		ShuffleImplementedCards();				// shuffle the deck twice for more randomness
 		ShuffleImplementedCards();
@@ -230,9 +250,9 @@ void CardDeck::ShuffleImplementedCards()
 {
 	srand(time(0));
 
-	for(int i = 0; i < numberOfCards; i++)
+	for (int i = 0; i < numberOfCards; i++)
 	{
-		swap(cards[i], cards[rand()%numberOfCards]);
+		swap(cards[i], cards[rand() % numberOfCards]);
 	}
 }
 
