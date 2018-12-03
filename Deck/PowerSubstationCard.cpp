@@ -13,9 +13,10 @@ PowerSubstationCard::~PowerSubstationCard() {
 }
 
 void PowerSubstationCard::Play(Player* playerData) {
-	/*playerData->setVictoryPoints(playerData->getVictoryPoints() + 1);
+	cout << "Playing your Power Substation Card..." << endl;
+	playerData->setVictoryPoints(playerData->getVictoryPoints() + 1);
 	playerData->setEnergy(playerData->getEnergy() + 8);
-	playerData->setHealth(playerData->getHealth() - 3);*/
-	cout << "POWER SUBSTATION CARD USED" << endl;
+	playerData->setHealth(playerData->getHealth() - 3);
+
 	system("pause");
 }

@@ -83,4 +83,17 @@ void Card::Play(Player* playerData)
 {
 	//the play method does absolutely nothing for the base class
 	std::cout << "Playing a base class card" << std::endl;
+	system("pause");
+}
+
+void Card::startBuy(Player* playerData)
+{
+	//this method is called at the beggining of the buy cards method
+	//for a card of the base class type, it doesn't need to do anything
+}
+
+void Card::endBuy(Player* playerData)
+{
+	//this method is called at the end of the buy cards method
+	//for a card of the base class type, it doesnt need to do anything
 }

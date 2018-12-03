@@ -144,6 +144,14 @@ void ModeratePlayerStrategy::execute(Player* playerData, CardDeck* cardDeck) {
 
 		if(randomNumbers[0])
 			playerData->cpuBuyCards(cardDeck);
+
+		node<Card*>* curr = playerData->getCards()->getHead();
+
+		while(curr != NULL)
+		{
+			curr -> getData() -> Play(playerData);
+			curr = curr -> getNext();
+		}
 		// 5. End Turn*/
 	}
 }

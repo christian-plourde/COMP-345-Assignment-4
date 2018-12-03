@@ -137,6 +137,16 @@ void AggressivePlayerStrategy::execute(Player* playerData, CardDeck* cardDeck) {
 
 		// 4. Buy Cards (optional)
 		playerData->cpuBuyCards(cardDeck);
+
+		//at the end of the turn, every card in the hand should be played
+
+		node<Card*>* curr = playerData->getCards()->getHead();
+
+		while(curr != NULL)
+		{
+			curr -> getData() -> Play(playerData);
+			curr = curr -> getNext();
+		}
 		// 5. End Turn*/
 	}
 }

@@ -1301,6 +1301,15 @@ void Player::buyCards(CardDeck* deck)
 	phase = Buy;
 	notify();
 
+	//next, we should execute the begin buy method for each card in the deck
+	node<Card*>* cr = deck -> getDeck() -> getHead();
+
+	while(cr != NULL)
+	{
+		cr -> getData() -> startBuy(this);
+		cr = cr -> getNext();
+	}
+
 	//this variable will hold the response that the player has given
 	std::string response = "";
 	int cardSelected = 0;
@@ -1599,6 +1608,15 @@ void Player::buyCards(CardDeck* deck)
 
 	}
 
+	//finally we should execute the end buy method for each card in the deck
+	node<Card*>* c = deck -> getDeck() -> getHead();
+
+	while(c != NULL)
+	{
+		c -> getData() -> endBuy(this);
+		c = c -> getNext();
+	}
+
 }
 
 void Player::cpuBuyCards(CardDeck* deck) {
@@ -1610,6 +1628,15 @@ void Player::cpuBuyCards(CardDeck* deck) {
 	//we need to change the phase and notify the observers
 	phase = Buy;
 	notify();
+
+	//next, we should execute the begin buy method for each card in the deck
+	node<Card*>* cr = deck -> getDeck() -> getHead();
+
+	while(cr != NULL)
+	{
+		cr -> getData() -> startBuy(this);
+		cr = cr -> getNext();
+	}
 
 	int cardSelected = 0;
 	bool validResponse = true;
@@ -1850,6 +1877,14 @@ void Player::cpuBuyCards(CardDeck* deck) {
 	delete[] randomNumbers;
 	randomNumbers = NULL;
 
+	//finally we should execute the end buy method for each card in the deck
+	node<Card*>* c = deck -> getDeck() -> getHead();
+
+	while(c != NULL)
+	{
+		c -> getData() -> endBuy(this);
+		c = c -> getNext();
+	}
 
 }
 

@@ -33,7 +33,12 @@ public:
 	string getEffect() const;					// get effect of card
 
 	void Print();								// nice print of card
+	virtual void startBuy(Player* playerData); //this method is called for each card that
+																						 //is possible for the player to buy
+																						 //at the beginning of the buy cards method
 	virtual void Play(Player* playerData); //this method is called when the card is played
+	virtual void endBuy(Player* playerData); //this method is called at the end of the buy
+																					 //cards method
 };
 
 #endif

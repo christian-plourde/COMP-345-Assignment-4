@@ -9,6 +9,8 @@ class ConeyIslandCard : public Card {
 		ConeyIslandCard();
 		~ConeyIslandCard();
 		void Play(Player* playerData);
+		void startBuy(Player* playerData); //a method called at the beginning of the buy cards method
+		void endBuy(Player* playerData); //a method called at the beginning of the buy cards method
 };
 
 #endif
