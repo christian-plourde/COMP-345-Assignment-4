@@ -23,6 +23,7 @@ public:
 	void addLast(node<T>*); //add a node to the end of the list
 	void remove(node<T>*); //remove a node from the list and delete it
 	node<T>* search(node<T>*); //search the list for a particular node
+	node<T>* search(T*);
 	node<T>* pull(node<T>*); //this method pulls out the passed node from the linked list
 	bool contains(node<T>*); //determines if the passed node is in the list
 	std::string toString(); //display the linked list's contents
@@ -170,6 +171,44 @@ node<T>* SinglyLinkedList<T>::search(node<T>* toFind)
 		{
 			//for each element in the list, check if the pointers are equal.
 			if (currentNode == toFind)
+			{
+				//if they point to the same object, return true
+				return currentNode;
+			}
+
+			else
+			{
+				//otherwise, move the currentNode to the next node
+				currentNode = currentNode->getNext();
+			}
+		}
+
+		//if we exit the loop it means it was not found
+		return NULL;
+	}
+
+}
+
+template <class T>
+node<T>* SinglyLinkedList<T>::search(T* toFind)
+{
+	//a method that will search for a passed node in the list and will return null if the node is not found
+	if (count == 0)
+	{
+		return NULL;
+	}
+
+	else
+	{
+		//start at the head
+		node<T>* currentNode = head;
+
+		int i = 0;
+
+		for (i = 0; i < count; i++)
+		{
+			//for each element in the list, check if the pointers are equal.
+			if (currentNode -> getData() == toFind)
 			{
 				//if they point to the same object, return true
 				return currentNode;

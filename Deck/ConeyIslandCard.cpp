@@ -15,7 +15,9 @@ ConeyIslandCard::~ConeyIslandCard() {
 void ConeyIslandCard::Play(Player* playerData) {
 	cout << "Playing your Coney Island Card..." << endl;
 	playerData->setVictoryPoints(playerData->getVictoryPoints() + 3);
-
+	//because this card is a discard type, we need to remove it from the player's hand after
+	//he has played it
+	//we first need to find the card to remove in his hand
 	system("pause");
 }
 
