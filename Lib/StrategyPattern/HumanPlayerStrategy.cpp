@@ -135,14 +135,20 @@ void HumanPlayerStrategy::execute(Player* playerData, CardDeck* cardDeck) {
 		// 4. Buy Cards (optional)
 		playerData->buyCards(cardDeck);
 
-		node<Card*>* curr = playerData->getCards()->getHead();
-
-		while(curr != NULL)
+		if(playerData -> getCards() -> getCount() > 0)
 		{
-			curr -> getData() -> Play(playerData);
-			curr = curr -> getNext();
-		}
+			std::cout << "Now playing the cards for " << playerData -> getName() << "." << std::endl;
+			node<Card*>* curr = playerData->getCards()->getHead();
 
+			while(curr != NULL)
+			{
+				curr -> getData() -> Play(playerData);
+				curr = curr -> getNext();
+			}
+
+			std::cout << playerData -> getName() << ", your cards have been played." << std::endl;
+			system("pause");
+		}
 		// 5. End Turn
 	}
 }
