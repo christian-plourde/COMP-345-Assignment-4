@@ -2,8 +2,6 @@
 #define HUMANPLAYERSTRATEGY_H
 
 #include "Strategy.h"
-//#include "Player.h"
-//#include "CardDeck.h"
 #include "../../Player/Player.h"
 #include "../../Deck/CardDeck.h"
 

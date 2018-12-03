@@ -16,7 +16,8 @@ FlatIronBuildingCard::~FlatIronBuildingCard() {
 void FlatIronBuildingCard::Play(Player* playerData) {
 	cout << "Playing your FlatIron Building Card..." << endl;
 	playerData->setVictoryPoints(playerData->getVictoryPoints() + 2);
-
+	node<Card*>* toRemove = playerData -> getCards() -> find(this);
+	playerData -> getCards() -> remove(toRemove);
 	system("pause");
 }
 

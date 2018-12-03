@@ -17,6 +17,8 @@ void PowerSubstationCard::Play(Player* playerData) {
 	playerData->setVictoryPoints(playerData->getVictoryPoints() + 1);
 	playerData->setEnergy(playerData->getEnergy() + 8);
 	playerData->setHealth(playerData->getHealth() - 3);
+	node<Card*>* toRemove = playerData -> getCards() -> find(this);
+	playerData -> getCards() -> remove(toRemove);
 
 	system("pause");
 }
